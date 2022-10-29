@@ -10,16 +10,34 @@ const studentList = [
 const button = document.querySelector('#btn');
 const output = document.querySelector('#output');
 
+const studentiEstratti = [];
+
 //creo un'evento del mio bottone dove all'interno scrivero' la mia logica
 button.addEventListener('click', function() {
-  //creo le mie due costanti conteggio massimo e minimo
-  const max = studentList.length - 1;
-  const min = 0;
-  //calcolo il mio numero max min random
-  const randomStudent = Math.floor(Math.random() * (max - min + 1) + min);
+  //utilizzo un ciclo while
+  //formula tipica che si utilizza per un controllo di univocità
+  //1 estrarre un numero compreso tra 0 e l'ultimo elemento dell'array
+  // 2 se il nome estratto è gia presente nell'array di studenti estratti devo estrarre un'altro numero fino a quando ne trovo uno non estratto
+  // 3 quando trovo un nuovo nome lo aggiungo all'elenco di studenti estratti
+  // 4 se l'elenco di studenti estratti è lungo uguale all'elenco della classe finisce
+  let isNomeEstratto = false;
 
-  console.log(randomStudent);
+  if(studentiEstratti.length < studentList.length) {
 
-  // stampo in pagina il risultato
-   output.innerHTML = studentList[randomStudent];
+    while (!isNomeEstratto) {
+      const randomStudent = Math.floor(Math.random() * studentList.length);
+      const nomeEstratto = studentList[randomStudent]
+      console.log(nomeEstratto, studentiEstratti);
+      if(!studentiEstratti.includes(nomeEstratto)) {
+        studentiEstratti.push(nomeEstratto);
+        isNomeEstratto = true;
+      }
+      output.innerHTML = nomeEstratto;
+    }
+  } else {
+    //fine
+    output.innerHTML = 'Tutti gli studenti sono stati estratti'
+    console.log('fine');
+  }
+
 })
