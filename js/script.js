@@ -25,7 +25,7 @@ button.addEventListener('click', function() {
   if(studentiEstratti.length < studentList.length) {
 
     while (!isNomeEstratto) {
-      const randomStudent = Math.floor(Math.random() * studentList.length);
+      const randomStudent = getRandomNumber(0, studentList.length - 1);
       const nomeEstratto = studentList[randomStudent]
       console.log(nomeEstratto, studentiEstratti);
       if(!studentiEstratti.includes(nomeEstratto)) {
@@ -41,3 +41,9 @@ button.addEventListener('click', function() {
   }
 
 })
+
+
+function getRandomNumber(min, max) {
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNumber;
+}
